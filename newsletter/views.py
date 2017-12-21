@@ -2,4 +2,10 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, "home.html", {})
+    title = 'Welcome'
+    if request.user.is_authenticated():
+        title = "My Title %s" % (request.user)
+    context = {
+        "template_title": title,
+    }
+    return render(request, "home.html", context)
